@@ -4,6 +4,13 @@ from nmea.gga import gga
 from nmea.rmc import rmc
 from nmea.gst import gst
 
+myGGA = gga()
+myRMC = rmc()
+myGST = gst()
+
+#from nmea.rmc import rmc
+from nmea.gst import gst
+
 
 class NMEAParser():
     # Constructor
@@ -51,15 +58,15 @@ class NMEAParser():
                 if sentence_id in SENTENCE_ID:
                     if sentence_id == 'GGA':
                         # Call a parsing function to get the required values
-                        self.gps_time, self.dd_longitude_degrees, self.dd_latitude_degrees, self.altitude, self.fix_quality = gga(CurrentNMEAString)
+                        self.gps_time, self.dd_longitude_degrees, self.dd_latitude_degrees, self.altitude, self.fix_quality = myGGA.parse(CurrentNMEAString)
                         self.gga_valid = True
                     if sentence_id == 'RMC':
                         # Call a parsing function to get the required values
-                        self.sog, self.cmg, self.date_of_fix, self.data_validity, self.pos_mode_indicator = rmc(CurrentNMEAString)
+                        self.sog, self.cmg, self.date_of_fix, self.data_validity, self.pos_mode_indicator = myRMC.parse(CurrentNMEAString)
                         self.rmc_valid = True
                     if sentence_id == 'GST':
                         # Call a parsing function to get the required values
-                        self.sigma_latitude, sigma_longitude, sigma_altitude = gst(CurrentNMEAString)
+                        self.sigma_latitude, sigma_longitude, sigma_altitude = myGST.parse(CurrentNMEAString)
                         self.gst_valid = True
                 else:
                     print(f'Bad sentence ID {sentence_id} in {CurrentNMEAString}')

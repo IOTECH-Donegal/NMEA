@@ -5,6 +5,8 @@ Various tables of data from UBlox documentation
 TALKER_ID = {
     'GN': 'GNSS Device',
     'GL': 'GLONASS',
+    'GQ': 'QZSS',
+    'GP': 'GPS Device',
     'GB': 'Beidou',
     'GA': 'Galileo'
 
