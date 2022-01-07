@@ -8,9 +8,6 @@ myGGA = gga()
 myRMC = rmc()
 myGST = gst()
 
-#from nmea.rmc import rmc
-from nmea.gst import gst
-
 
 class NMEAParser():
     # Constructor

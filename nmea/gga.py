@@ -23,21 +23,7 @@ class gga():
         # Switch this on for verbose processing
         self.debug = 1
 
-        # Timers for each sentence, check to see if data stale when calling this class
-        self.posllh_TOW = ''
-        self.relposned_TOW = ''
-
-        # Properties
-        self.gps_time = ''
-        self.dd_longitude_degrees = 0
-        self.dd_latitude_degrees = 0
-        self.altitude = 0
-        self.sog = 0
-        self.cmg = 0
-        self.date_of_fix = 0
-        self.data_validity = 0
-        self.pos_mode_indicator = 0
-
+    @staticmethod
     def parse(self, sentence):
         # Default, invalid fix
         fix_quality = '0'
@@ -80,6 +66,7 @@ class gga():
 
         return gps_time, dd_longitude_degrees, dd_latitude_degrees, altitude3, fix_quality
 
+    @staticmethod
     def create(self, sentence):
         # Default, invalid fix
         fix_quality = '0'

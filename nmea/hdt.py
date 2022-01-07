@@ -14,6 +14,7 @@ class hdg():
         # Switch this on for verbose processing
         self.debug = 1
 
+    @staticmethod
     def parse(self, sentence):
         # Default, invalid fix
         fix_quality = '0'
@@ -22,6 +23,7 @@ class hdg():
         dd_latitude_degrees = 0
         altitude3 = 0
 
+    @staticmethod
     def create(self, headt):
         # Construct a partial sentence, no $ and no CRC
         nmea_partial_sentence = "GPHDT," + headt + ",T"

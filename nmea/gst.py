@@ -15,6 +15,7 @@ class gst():
         # Switch this on for verbose processing
         self.debug = 1
 
+    @staticmethod
     def parse(self, sentence):
         # Return values
         sigma_latitude = '0'
@@ -32,6 +33,7 @@ class gst():
 
         return sigma_latitude, sigma_longitude, sigma_altitude
 
+    @staticmethod
     def create(self, sentence):
         # Default, invalid fix
         fix_quality = '0'
