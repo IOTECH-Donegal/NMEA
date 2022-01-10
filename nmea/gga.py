@@ -56,8 +56,10 @@ class gga():
                 if list_of_values[5] == 'W':
                     self.longitude = -self.longitude
                 # Get Altitude
-                self.altitude = float(list_of_values[9])
-                self.geoid_separation = float(list_of_values[11])
+                altitude = float(list_of_values[9])
+                geoid_separation = float(list_of_values[11])
+                # To get the true altitude, add height above MSL to HoG and then convert to OSGM15 externally, limit to 3 decimal places (mm)
+                self.altitude = round(altitude + geoid_separation, 3)
                 # Get time
                 hour, minute, second = int(list_of_values[1][:2]), int(list_of_values[1][2:4]), int(list_of_values[1][4:6])
                 self.time = (f'{hour}:{minute}:{second}')

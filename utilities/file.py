@@ -1,5 +1,5 @@
 from datetime import datetime
-import sys
+import sys, csv
 
 
 def path_name():
@@ -23,3 +23,5 @@ def log_file_name(extension):
     # Linux
     file_name = '%0.4d%0.2d%0.2d-%0.2d%0.2d%0.2d' % (now.year, now.month, now.day, now.hour, now.minute, now.second)
     return file_name + extension
+
+
