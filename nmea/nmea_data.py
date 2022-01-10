@@ -24,6 +24,9 @@ SENTENCE_ID = {
 
 GGA_Quality = {
     '0': 'No position',
+    '1': '2D GNSS',
+    '2': '3D GNSS/DGPS',
+    '3': 'PPS Fix',
     '4': 'RTK Fixed',
     '5': 'RTK Float',
     '6': 'Dead Reckoning'
@@ -32,7 +35,7 @@ GGA_Quality = {
 RMC_PosMode = {
     'N': 'No fix',
     'E': 'Estimated/dead reckoning fix',
-    'A': 'autonomous GNSS fix',
+    'A': 'Autonomous GNSS fix',
     'D': 'Differential GNSS fix',
     'F': 'RTK float',
     'R': 'RTK fixed'

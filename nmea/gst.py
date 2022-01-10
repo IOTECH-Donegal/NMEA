@@ -14,27 +14,25 @@ class gst():
     def __init__(self):
         # Switch this on for verbose processing
         self.debug = 1
+        self.sigma_latitude = '0'
+        self.sigma_longitude = '0'
+        self.sigma_altitude = '0'
 
-    @staticmethod
     def parse(self, sentence):
-        # Return values
-        sigma_latitude = '0'
-        sigma_longitude = '0'
-        sigma_altitude = '0'
-
         try:
             list_of_values = sentence.split(',')
-            sigma_latitude = list_of_values[6]
-            sigma_longitude = list_of_values[7]
+            self.sigma_latitude = float(list_of_values[6])
+            self.sigma_longitude = list_of_values[7]
             sigma_altitude_and_crc = list_of_values[8].split('*')
-            sigma_altitude = sigma_altitude_and_crc[0]
+            self.sigma_altitude = sigma_altitude_and_crc[0]
+
         except ValueError:
             print(f'[GST] Error parsing {sentence}')
 
-        return sigma_latitude, sigma_longitude, sigma_altitude
+        return self.sigma_latitude, self.sigma_longitude, self.sigma_altitude
 
     @staticmethod
-    def create(self, sentence):
+    def create(sentence):
         # Default, invalid fix
         fix_quality = '0'
         gps_time = ''

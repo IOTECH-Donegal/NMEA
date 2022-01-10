@@ -14,7 +14,7 @@ class hdg():
         self.debug = 1
 
     @staticmethod
-    def parse(self, sentence):
+    def parse(sentence):
         # Default, invalid fix
         fix_quality = '0'
         gps_time = ''
@@ -23,7 +23,7 @@ class hdg():
         altitude3 = 0
 
     @staticmethod
-    def create(self, sentence):
+    def create(sentence):
         # Default, invalid fix
         fix_quality = '0'
         gps_time = ''

@@ -42,3 +42,8 @@ def calculate_crc(nmea_partial_sentence):
     # Convert to hex, 2 digits
     calculated_checksum_2_digits = format(calculated_checksum, '02X')
     return calculated_checksum_2_digits
+
+
+def time_difference(dt1, dt2):
+    dt = dt2 - dt1
+    return dt.total_seconds()

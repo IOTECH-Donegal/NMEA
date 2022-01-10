@@ -1,3 +1,5 @@
+from nmea.nmea_data import GGA_Quality
+
 '''
 GNGGA,120113.00,5510.0019168,N,00726.0946454,W,4,12,0.60,109.635,M,53.911,M,1.0,0000*73
 1 - Fix taken at in UTC as hhmmss.ss
@@ -23,51 +25,56 @@ class gga():
         # Switch this on for verbose processing
         self.debug = 1
 
-    @staticmethod
-    def parse(self, sentence):
-        # Default, invalid fix
-        fix_quality = '0'
-        gps_time = ''
-        dd_longitude_degrees = 0
-        dd_latitude_degrees = 0
-        altitude3 = 0
+        self.date = ''
+        self.time = ''
+        self.debug = 1
+        self.fix_quality = ''
+        self.latitude = 0
+        self.longitude = 0
+        self.altitude = 0
+        self.geoid_separation = 0
+        self.sog = 0
+        self.cmg = 0
 
+    def parse(self, sentence):
         try:
             list_of_values = sentence.split(',')
-            gps_time = list_of_values[1]
-
-            # Get the decimal degree values of position
-            latitude_dm = (list_of_values[2])
-            dm_latitude_degrees = int(latitude_dm[0:2])
-            dm_latitude_minutes = float(latitude_dm[2:])
-            dm_latitude_minutes_fraction = float(dm_latitude_minutes / 60)
-            dd_latitude_degrees = round(dm_latitude_degrees + dm_latitude_minutes_fraction, 8)
-
-            # Longitude converts to negative, edit this if working east of Greenwich
-            longitude_dm = (list_of_values[4])
-            dm_longitude_degrees = int(longitude_dm[0:3])
-            dm_longitude_minutes = float(longitude_dm[3:])
-            dm_longitude_minutes_fraction = float(dm_longitude_minutes / 60)
-            dd_longitude_degrees = round(-dm_longitude_degrees - dm_longitude_minutes_fraction, 8)
-
-            # To get the true altitude, add height above MSL to HoG and then convert to OSGM15 externally.
-            msl = list_of_values[9]
-            hog = list_of_values[11]
-            altitude = float(msl) + float(hog)
-            # Limit to 3 decimal places (mm)
-            altitude3 = round(altitude, 3)
 
             # Verify the quality of the solution
             number_satellites_tracked = list_of_values[7]
             fix_quality = list_of_values[6]
 
+            # Check if valid sentence
+            if int(list_of_values[6]) > 0:
+
+                # Get latitude in DD
+                self.latitude = float(list_of_values[2][:2]) + float(list_of_values[2][2:]) / 60
+                if list_of_values[3] == 'S':
+                    self.latitude = -self.latitude
+                # Get longitude DD
+                self.longitude = float(list_of_values[4][:3]) + float(list_of_values[4][3:]) / 60
+                if list_of_values[5] == 'W':
+                    self.longitude = -self.longitude
+                # Get Altitude
+                self.altitude = float(list_of_values[9])
+                self.geoid_separation = float(list_of_values[11])
+                # Get time
+                hour, minute, second = int(list_of_values[1][:2]), int(list_of_values[1][2:4]), int(list_of_values[1][4:6])
+                self.time = (f'{hour}:{minute}:{second}')
+
+                # Look up the Fix Quality
+                if list_of_values[6] in GGA_Quality:
+                    self.fix_quality = int(list_of_values[6])
+                else:
+                    self.fix_quality = ''
+
         except ValueError:
             print(f'[GGA] Error parsing {sentence}')
 
-        return gps_time, dd_longitude_degrees, dd_latitude_degrees, altitude3, fix_quality
+        return self.time, self.longitude, self.latitude, self.altitude, self.fix_quality
 
     @staticmethod
-    def create(self, sentence):
+    def create(sentence):
         # Default, invalid fix
         fix_quality = '0'
         gps_time = ''

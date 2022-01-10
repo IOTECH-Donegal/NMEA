@@ -15,7 +15,7 @@ class hdg():
         self.debug = 1
 
     @staticmethod
-    def parse(self, sentence):
+    def parse(sentence):
         # Default, invalid fix
         fix_quality = '0'
         gps_time = ''
@@ -24,7 +24,7 @@ class hdg():
         altitude3 = 0
 
     @staticmethod
-    def create(self, headt):
+    def create(headt):
         # Construct a partial sentence, no $ and no CRC
         nmea_partial_sentence = "GPHDT," + headt + ",T"
         if self.debug == 1:
