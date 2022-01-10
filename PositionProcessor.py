@@ -2,7 +2,7 @@ import os
 import csv
 from nmea.NMEAParser import NMEAParser
 
-print('Utility to process NMEA 0183 v. 4.11 sentences for land survey/position only')
+print('Windows utility to process NMEA 0183 v. 4.11 sentences for land survey/position only')
 print('GGA is processed for XYZ positions')
 print('RMC is processed for COG, SOG and date')
 print('GST is processed for XYZ accuracy')
