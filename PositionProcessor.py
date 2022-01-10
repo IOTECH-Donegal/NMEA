@@ -2,8 +2,11 @@ import os
 import csv
 from nmea.NMEAParser import NMEAParser
 
-# Instantiate an object to parse NMEA
-myNMEA = NMEAParser()
+print('Utility to process NMEA 0183 v. 4.11 sentences for land survey/position only')
+print('GGA is processed for XYZ positions')
+print('RMC is processed for COG, SOG and date')
+print('GST is processed for XYZ accuracy')
+input('Press ENTER to continue...')
 
 output_file_name = './processed/summary.csv'
 print(f'Saving data as {output_file_name}')
@@ -16,6 +19,10 @@ with output_file:
 
 # Raw data files
 directory = './logfiles'
+
+# Instantiate an object to parse NMEA
+myNMEA = NMEAParser()
+
 # Open every file in sequence
 for file in os.listdir(directory):
     input_filename = directory + '/' + file
