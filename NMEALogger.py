@@ -9,7 +9,7 @@ nmea_log_file_name = path_name() + log_file_name('.nmea')
 # Open the file for append
 nmea_output_file = open(nmea_log_file_name, 'a', newline='')
 
-print('***** NMEA Sensor *****')
+print('***** NMEA Logger *****')
 print('Accepts NMEA from a serial port:')
 print('1. Extracts information and logs')
 print('2. Optional: outputs to an IP address/port for other applications to use.')
@@ -56,7 +56,7 @@ try:
                 nmea_output_file.writelines(nmea_full_string)
                 # Force OS to write each line, not to buffer
                 nmea_output_file.flush()
-                print(f'NMEA: Received {nmea_full_string}')
+                print(f'NMEA: Received {nmea_full_string.strip()}')
 
 except serial.SerialException as err:
     print(f"Terminating with a serial port error: \n {err}")
