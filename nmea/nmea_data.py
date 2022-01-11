@@ -17,6 +17,7 @@ SENTENCE_ID = {
     'GGA': 'Global positioning system fix data',
     'GST': 'GNSS pseudorange error statistics',
     'GSV': 'GNSS satellites in view',
+    'THS': 'True heading and status',
     'TXT': 'Text',
     'VTG': 'Course over ground and ground speed'
 
@@ -39,4 +40,12 @@ RMC_PosMode = {
     'D': 'Differential GNSS fix',
     'F': 'RTK float',
     'R': 'RTK fixed'
+}
+
+THS_ModeIndicator = {
+    'A': 'Autonomous',
+    'E': 'Estimated (dead reckoning)',
+    'M': 'Manual input',
+    'S': 'Simulator',
+    'V': 'Data not valid'
 }

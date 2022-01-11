@@ -22,9 +22,9 @@ class gst():
         try:
             list_of_values = sentence.split(',')
             self.sigma_latitude = float(list_of_values[6])
-            self.sigma_longitude = list_of_values[7]
+            self.sigma_longitude = float(list_of_values[7])
             sigma_altitude_and_crc = list_of_values[8].split('*')
-            self.sigma_altitude = sigma_altitude_and_crc[0]
+            self.sigma_altitude = float(sigma_altitude_and_crc[0])
 
         except ValueError:
             print(f'[GST] Error parsing {sentence}')
