@@ -13,7 +13,7 @@ print(f'Saving data as {output_file_name}')
 # Now create the CSV file and headers
 output_file = open(output_file_name, 'w', newline='')
 with output_file:
-    file_header = ['Date', 'UTC', 'Longitude', 'Latitude', 'Altitude', 'SOG', 'CMG', 'Sigma Latitude', 'Sigma Longitude', 'Sigma Altitude']
+    file_header = ['Date', 'UTC', 'Longitude', 'Latitude', 'Altitude', 'SOG', 'CMG', 'Sigma Latitude', 'Sigma Longitude', 'Sigma Altitude', 'True Heading', 'Fix quality']
     writer = csv.writer(output_file)
     writer.writerow(file_header)
 
@@ -32,10 +32,17 @@ for file in os.listdir(directory):
         # one line at a time, parse
         for CurrentNMEAString in nmea_file:
             myNMEA.parser(CurrentNMEAString)
-            output_file = open(output_file_name, 'a', newline='')
-            with output_file:
-                line_data = [myNMEA.date_of_fix, myNMEA.gps_time, myNMEA.dd_longitude_degrees,
-                             myNMEA.dd_latitude_degrees, myNMEA.altitude, myNMEA.sog, myNMEA.cmg,
-                             myNMEA.sigma_latitude, myNMEA.sigma_longitude, myNMEA.sigma_altitude]
-                writer = csv.writer(output_file)
-                writer.writerow(line_data)
+            if myNMEA.gga_valid and myNMEA.rmc_valid and myNMEA.gst_valid:
+                output_file = open(output_file_name, 'a', newline='')
+                with output_file:
+                    line_data = [myNMEA.date_of_fix, myNMEA.gps_time, myNMEA.dd_longitude_degrees,
+                                 myNMEA.dd_latitude_degrees, myNMEA.altitude, myNMEA.sog, myNMEA.cmg,
+                                 myNMEA.sigma_latitude, myNMEA.sigma_longitude, myNMEA.sigma_altitude,
+                                 myNMEA.heading_true, myNMEA.fix_quality]
+                    writer = csv.writer(output_file)
+                    writer.writerow(line_data)
+
+                    # Wait until valid GGA, RMC and GST before saving in CSV again.
+                    myNMEA.gga_valid = False
+                    myNMEA.rmc_valid = False
+                    myNMEA.gst_valid = False
