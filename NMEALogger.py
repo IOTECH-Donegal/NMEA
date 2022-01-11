@@ -3,9 +3,9 @@ import sys
 
 # Utilities used for file handling and logging
 from utilities.file import log_file_name as log_file_name
-from utilities.file import path_name as path_name
+
 # NMEA Log File
-nmea_log_file_name = path_name() + log_file_name('.nmea')
+nmea_log_file_name = './logfiles/' + log_file_name('.nmea')
 # Open the file for append
 nmea_output_file = open(nmea_log_file_name, 'a', newline='')
 
