@@ -23,8 +23,7 @@ class hdg():
         dd_latitude_degrees = 0
         altitude3 = 0
 
-    @staticmethod
-    def create(headt):
+    def create(self, headt):
         # Construct a partial sentence, no $ and no CRC
         nmea_partial_sentence = "GPHDT," + headt + ",T"
         if self.debug == 1:
