@@ -9,10 +9,10 @@ nmea_log_file_name = './logfiles/' + log_file_name('.nmea')
 # Open the file for append
 nmea_output_file = open(nmea_log_file_name, 'a', newline='')
 
-print('***** NMEA Logger *****')
+print('***** NMEA Sensor *****')
 print('Accepts NMEA from a serial port:')
-print('1. Logs raw data')
-
+print('1. Extracts information and logs raw NMEA')
+print('2. Outputs to an IP address/port for other applications to use.')
 
 try:
     with serial.Serial("COM14") as serial_port:
@@ -55,7 +55,6 @@ try:
                 nmea_full_string = nmea_full_bytes.decode("latin-1")
                 # Check for corrupted lines
                 if nmea_full_string.isascii():
-                    # If sentence is OK, record it in a logfile
                     nmea_output_file.writelines(nmea_full_string)
                     # Force OS to write each line, not to buffer
                     nmea_output_file.flush()

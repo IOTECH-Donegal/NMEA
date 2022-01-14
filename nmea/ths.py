@@ -16,6 +16,9 @@ class ths():
         self.heading_true = 0
 
     def parse(self, sentence):
+        if self.debug == 1:
+            print(f'Debug THS:{sentence}')
+
         list_of_values = sentence.split(',')
         try:
             # Check if valid sentence
@@ -25,6 +28,8 @@ class ths():
 
         except ValueError:
             print(f'[THS] Error parsing {sentence}')
+        except:
+            print(f'Debug THS:{sentence}')
 
         return self.mode_indicator, self.heading_true,
 
