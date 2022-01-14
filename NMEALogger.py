@@ -15,8 +15,8 @@ print('1. Logs raw data')
 
 
 try:
-    with serial.Serial("COM14") as serial_port:
-        serial_port.baudrate = 38400
+    with serial.Serial("/dev/ttySC1") as serial_port:
+        serial_port.baudrate = 19200
         serial_port.bytesize = serial.EIGHTBITS
         serial_port.parity = serial.PARITY_NONE
         serial_port.stopbits = serial.STOPBITS_ONE
