@@ -47,11 +47,11 @@ class rmc():
             # Check if valid sentence
             if list_of_values[2] == 'A':
                 # Get latitude in DD
-                self.latitude = float(list_of_values[3][:2]) + float(list_of_values[3][2:]) / 60
+                self.latitude = round(float(list_of_values[3][:2]) + float(list_of_values[3][2:]) / 60, 8)
                 if list_of_values[4] == 'S':
                     self.latitude = -self.latitude
                 # Get longitude DD
-                self.longitude = float(list_of_values[5][:3]) + float(list_of_values[5][3:]) / 60
+                self.longitude = round(float(list_of_values[5][:3]) + float(list_of_values[5][3:]) / 60, 8)
                 if list_of_values[6] == 'W':
                     self.longitude = -self.longitude
                 # Get date and time

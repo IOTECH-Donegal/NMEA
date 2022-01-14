@@ -47,12 +47,12 @@ class gga():
             # Check if valid sentence
             if int(list_of_values[6]) > 0:
 
-                # Get latitude in DD
-                self.latitude = float(list_of_values[2][:2]) + float(list_of_values[2][2:]) / 60
+                # Get latitude in DD rounded to 8 decimals
+                self.latitude = round(float(list_of_values[2][:2]) + float(list_of_values[2][2:]) / 60, 8)
                 if list_of_values[3] == 'S':
                     self.latitude = -self.latitude
-                # Get longitude DD
-                self.longitude = float(list_of_values[4][:3]) + float(list_of_values[4][3:]) / 60
+                # Get longitude DD rounded to 8 decimals
+                self.longitude = round(float(list_of_values[4][:3]) + float(list_of_values[4][3:]) / 60, 8)
                 if list_of_values[5] == 'W':
                     self.longitude = -self.longitude
                 # Get Altitude
