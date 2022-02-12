@@ -15,8 +15,8 @@ print('1. Extracts information and logs raw NMEA')
 print('2. Outputs to an IP address/port for other applications to use.')
 
 try:
-    with serial.Serial("COM14") as serial_port:
-        serial_port.baudrate = 38400
+    with serial.Serial("/dev/ttyAMA3") as serial_port:
+        serial_port.baudrate = 115200
         serial_port.bytesize = serial.EIGHTBITS
         serial_port.parity = serial.PARITY_NONE
         serial_port.stopbits = serial.STOPBITS_ONE
@@ -27,27 +27,6 @@ try:
             byte1 = serial_port.read(1)
             if len(byte1) < 1:
                 break
-
-            # Check for UBX header = xB5 and X62, Unicode = µb
-            # Minimal UBX code, just to read the bytes
-            if byte1 == b"\xb5":
-                byte2 = serial_port.read(1)
-                if len(byte2) < 1:
-                    break
-                if byte2 == b"\x62":
-                    # Get the UBX class
-                    byte3 = serial_port.read(1)
-                    # Get the UBX message
-                    byte4 = serial_port.read(1)
-                    # Get the UBX payload length
-                    byte5and6 = serial_port.read(2)
-                    # Calculate the length of the payload
-                    length_of_payload = int.from_bytes(byte5and6, "little", signed=False)
-                    # Read the buffer for the payload length
-                    ubx_payload = serial_port.read(length_of_payload)
-                    # Last two bytes are 2*CRC, save them for later use
-                    ubx_crc_a = serial_port.read(1)
-                    ubx_crc_b = serial_port.read(1)
 
             # Check for NMEA0183, leading with a $ symbol
             elif byte1 == b"\x24":
